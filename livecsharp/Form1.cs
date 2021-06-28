@@ -55,7 +55,28 @@ namespace livecsharp
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
+            Aluno aluno = new Aluno (0, textNome.Text, textEmail.Text, textTelefone.Text, textSenha.Text, true);
+            textId.Text = aluno.Id.ToString();
+            aluno.Inserir();
+            MessageBox.Show("Aluno Adicionado");
+            LimparCampos();
+            
+        }
+        private void LimparCampos()
+        {
+            textId.Clear(); textNome.Clear(); textEmail.Clear(); textTelefone.Clear(); textEmail.Clear(); textSenha.Clear(); chkAtivo.Checked = false;
+
+        }
+
+        private void btnListar_Click(object sender, EventArgs e)
+        {
+            lstLista.Items.Clear();
             Aluno aluno = new Aluno();
+            var lista = aluno.ListarAlunos();
+            foreach (var item in lista)
+            {
+                lstLista.Items.Add(item.Nome + "-" +item.Email + "-" + item.Telefone);
+            }
         }
     }
 }
