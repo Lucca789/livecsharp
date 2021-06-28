@@ -29,7 +29,7 @@ namespace livecsharp.Classes
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "insert aluno values(null, '"+Nome+"',  '"+Email+"', '"+Telefone+"',md5('"+Senha+"'), 1 )";
+            cmd.CommandText = "insert alunos values(null, '"+Nome+"',  '"+Email+"', '"+Telefone+"',md5('"+Senha+"'), 1 )";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar()); //Cast - Parse - Convert
