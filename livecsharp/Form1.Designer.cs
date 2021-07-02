@@ -43,15 +43,22 @@ namespace livecsharp
             this.textSenha = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.chkAtivo = new System.Windows.Forms.CheckBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvLista = new System.Windows.Forms.DataGridView();
             this.chkVisualizar = new System.Windows.Forms.CheckBox();
-            this.lstLista = new System.Windows.Forms.ListBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.clnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnTelefone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnAtivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnInserir
             // 
-            this.btnInserir.Location = new System.Drawing.Point(80, 403);
+            this.btnInserir.Location = new System.Drawing.Point(431, 315);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(75, 35);
             this.btnInserir.TabIndex = 0;
@@ -61,7 +68,7 @@ namespace livecsharp
             // 
             // btnAlterar
             // 
-            this.btnAlterar.Location = new System.Drawing.Point(228, 403);
+            this.btnAlterar.Location = new System.Drawing.Point(530, 315);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(75, 35);
             this.btnAlterar.TabIndex = 1;
@@ -70,7 +77,7 @@ namespace livecsharp
             // 
             // btnListar
             // 
-            this.btnListar.Location = new System.Drawing.Point(368, 403);
+            this.btnListar.Location = new System.Drawing.Point(636, 315);
             this.btnListar.Name = "btnListar";
             this.btnListar.Size = new System.Drawing.Size(75, 35);
             this.btnListar.TabIndex = 2;
@@ -177,15 +184,30 @@ namespace livecsharp
             this.chkAtivo.Text = "Ativo";
             this.chkAtivo.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgvLista
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(482, 30);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(285, 288);
-            this.dataGridView1.TabIndex = 14;
+            this.dgvLista.AllowUserToAddRows = false;
+            this.dgvLista.AllowUserToDeleteRows = false;
+            this.dgvLista.AllowUserToResizeColumns = false;
+            this.dgvLista.AllowUserToResizeRows = false;
+            this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLista.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clnId,
+            this.clnNome,
+            this.clnEmail,
+            this.clnTelefone,
+            this.clnAtivo});
+            this.dgvLista.Location = new System.Drawing.Point(67, 373);
+            this.dgvLista.Name = "dgvLista";
+            this.dgvLista.ReadOnly = true;
+            this.dgvLista.RowHeadersVisible = false;
+            this.dgvLista.RowHeadersWidth = 62;
+            this.dgvLista.RowTemplate.Height = 28;
+            this.dgvLista.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvLista.Size = new System.Drawing.Size(678, 150);
+            this.dgvLista.TabIndex = 14;
+            this.dgvLista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellContentClick);
             // 
             // chkVisualizar
             // 
@@ -197,23 +219,85 @@ namespace livecsharp
             this.chkVisualizar.Text = "Visualizar";
             this.chkVisualizar.UseVisualStyleBackColor = true;
             // 
-            // lstLista
+            // clnId
             // 
-            this.lstLista.FormattingEnabled = true;
-            this.lstLista.ItemHeight = 20;
-            this.lstLista.Location = new System.Drawing.Point(482, 345);
-            this.lstLista.Name = "lstLista";
-            this.lstLista.Size = new System.Drawing.Size(285, 104);
-            this.lstLista.TabIndex = 16;
+            this.clnId.Frozen = true;
+            this.clnId.HeaderText = "ID";
+            this.clnId.MinimumWidth = 8;
+            this.clnId.Name = "clnId";
+            this.clnId.ReadOnly = true;
+            this.clnId.Width = 80;
+            // 
+            // clnNome
+            // 
+            this.clnNome.Frozen = true;
+            this.clnNome.HeaderText = "Nome";
+            this.clnNome.MinimumWidth = 8;
+            this.clnNome.Name = "clnNome";
+            this.clnNome.ReadOnly = true;
+            // 
+            // clnEmail
+            // 
+            this.clnEmail.Frozen = true;
+            this.clnEmail.HeaderText = "Email";
+            this.clnEmail.MinimumWidth = 8;
+            this.clnEmail.Name = "clnEmail";
+            this.clnEmail.ReadOnly = true;
+            // 
+            // clnTelefone
+            // 
+            this.clnTelefone.Frozen = true;
+            this.clnTelefone.HeaderText = "Telefone";
+            this.clnTelefone.MinimumWidth = 8;
+            this.clnTelefone.Name = "clnTelefone";
+            this.clnTelefone.ReadOnly = true;
+            // 
+            // clnAtivo
+            // 
+            this.clnAtivo.Frozen = true;
+            this.clnAtivo.HeaderText = "Ativo";
+            this.clnAtivo.MinimumWidth = 8;
+            this.clnAtivo.Name = "clnAtivo";
+            this.clnAtivo.ReadOnly = true;
+            this.clnAtivo.Width = 80;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(772, 422);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 27);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Buscar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(772, 471);
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 26);
+            this.numericUpDown1.TabIndex = 17;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Enter += new System.EventHandler(this.numericUpDown1_Enter);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lstLista);
+            this.ClientSize = new System.Drawing.Size(915, 535);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.chkVisualizar);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvLista);
             this.Controls.Add(this.chkAtivo);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textSenha);
@@ -231,7 +315,8 @@ namespace livecsharp
             this.Name = "Form1";
             this.Text = "Cadastro do Aluno";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -253,9 +338,15 @@ namespace livecsharp
         private System.Windows.Forms.TextBox textSenha;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox chkAtivo;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvLista;
         private System.Windows.Forms.CheckBox chkVisualizar;
-        private System.Windows.Forms.ListBox lstLista;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnNome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnTelefone;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn clnAtivo;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 
