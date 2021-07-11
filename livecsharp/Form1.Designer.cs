@@ -44,14 +44,16 @@ namespace livecsharp
             this.label5 = new System.Windows.Forms.Label();
             this.chkAtivo = new System.Windows.Forms.CheckBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
-            this.chkVisualizar = new System.Windows.Forms.CheckBox();
             this.clnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnTelefone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnAtivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chkVisualizar = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.btnHabilitaBusca = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
@@ -68,12 +70,14 @@ namespace livecsharp
             // 
             // btnAlterar
             // 
+            this.btnAlterar.Enabled = false;
             this.btnAlterar.Location = new System.Drawing.Point(530, 315);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(75, 35);
             this.btnAlterar.TabIndex = 1;
             this.btnAlterar.Text = "Alterar";
             this.btnAlterar.UseVisualStyleBackColor = true;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // btnListar
             // 
@@ -209,16 +213,6 @@ namespace livecsharp
             this.dgvLista.TabIndex = 14;
             this.dgvLista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellContentClick);
             // 
-            // chkVisualizar
-            // 
-            this.chkVisualizar.AutoSize = true;
-            this.chkVisualizar.Location = new System.Drawing.Point(190, 326);
-            this.chkVisualizar.Name = "chkVisualizar";
-            this.chkVisualizar.Size = new System.Drawing.Size(103, 24);
-            this.chkVisualizar.TabIndex = 15;
-            this.chkVisualizar.Text = "Visualizar";
-            this.chkVisualizar.UseVisualStyleBackColor = true;
-            // 
             // clnId
             // 
             this.clnId.Frozen = true;
@@ -235,6 +229,7 @@ namespace livecsharp
             this.clnNome.MinimumWidth = 8;
             this.clnNome.Name = "clnNome";
             this.clnNome.ReadOnly = true;
+            this.clnNome.Width = 150;
             // 
             // clnEmail
             // 
@@ -243,6 +238,7 @@ namespace livecsharp
             this.clnEmail.MinimumWidth = 8;
             this.clnEmail.Name = "clnEmail";
             this.clnEmail.ReadOnly = true;
+            this.clnEmail.Width = 150;
             // 
             // clnTelefone
             // 
@@ -251,6 +247,7 @@ namespace livecsharp
             this.clnTelefone.MinimumWidth = 8;
             this.clnTelefone.Name = "clnTelefone";
             this.clnTelefone.ReadOnly = true;
+            this.clnTelefone.Width = 150;
             // 
             // clnAtivo
             // 
@@ -260,6 +257,17 @@ namespace livecsharp
             this.clnAtivo.Name = "clnAtivo";
             this.clnAtivo.ReadOnly = true;
             this.clnAtivo.Width = 80;
+            // 
+            // chkVisualizar
+            // 
+            this.chkVisualizar.AutoSize = true;
+            this.chkVisualizar.Location = new System.Drawing.Point(190, 326);
+            this.chkVisualizar.Name = "chkVisualizar";
+            this.chkVisualizar.Size = new System.Drawing.Size(103, 24);
+            this.chkVisualizar.TabIndex = 15;
+            this.chkVisualizar.Text = "Visualizar";
+            this.chkVisualizar.UseVisualStyleBackColor = true;
+            this.chkVisualizar.CheckedChanged += new System.EventHandler(this.chkVisualizar_CheckedChanged);
             // 
             // button1
             // 
@@ -289,11 +297,33 @@ namespace livecsharp
             0});
             this.numericUpDown1.Enter += new System.EventHandler(this.numericUpDown1_Enter);
             // 
+            // btnHabilitaBusca
+            // 
+            this.btnHabilitaBusca.Location = new System.Drawing.Point(169, 27);
+            this.btnHabilitaBusca.Name = "btnHabilitaBusca";
+            this.btnHabilitaBusca.Size = new System.Drawing.Size(84, 33);
+            this.btnHabilitaBusca.TabIndex = 18;
+            this.btnHabilitaBusca.Text = "...";
+            this.btnHabilitaBusca.UseVisualStyleBackColor = true;
+            this.btnHabilitaBusca.Click += new System.EventHandler(this.btnHabilitaBusca_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(333, 315);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 35);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "Excluir";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 535);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnHabilitaBusca);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.chkVisualizar);
@@ -347,6 +377,8 @@ namespace livecsharp
         private System.Windows.Forms.DataGridViewCheckBoxColumn clnAtivo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button btnHabilitaBusca;
+        private System.Windows.Forms.Button button2;
     }
 }
 

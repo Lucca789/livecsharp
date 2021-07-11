@@ -64,7 +64,10 @@ namespace livecsharp
         }
         private void LimparCampos()
         {
-            textId.Clear(); textNome.Clear(); textEmail.Clear(); textTelefone.Clear(); textEmail.Clear(); textSenha.Clear(); chkAtivo.Checked = false;
+            textId.Clear(); textNome.Clear(); textEmail.Clear(); textTelefone.Clear(); textSenha.Clear(); chkAtivo.Checked = false; textId.Clear(); textId.ReadOnly = true;
+            btnInserir.Enabled = true;
+            btnHabilitaBusca.Text = "...";
+            btnAlterar.Enabled = false;
 
         }
 
@@ -106,6 +109,62 @@ namespace livecsharp
                 dgvLista.Rows[lista.IndexOf(a)].Cells[clnTelefone.Index].Value = a.Telefone;
                 dgvLista.Rows[lista.IndexOf(a)].Cells[clnAtivo.Index].Value = a.Ativo;
             });
+        }
+
+        private void btnHabilitaBusca_Click(object sender, EventArgs e)
+        {
+            if (btnHabilitaBusca.Text == "...")
+            {
+                textId.ReadOnly = false;
+                textId.Focus();
+                btnInserir.Enabled = false;
+                btnAlterar.Enabled = true;
+                btnHabilitaBusca.Text = "Buscar";
+                chkAtivo.Enabled = true;
+            }
+            else if (btnHabilitaBusca.Text == "Buscar")
+            {
+               if (textId.Text != string.Empty)
+                {
+                    Aluno aluno = new Aluno();
+                    aluno.ConsutarPorId(int.Parse(textId.Text));
+                    textNome.Text = aluno.Nome;
+                    textEmail.Text = aluno.Email;
+                 //   textEmail.ReadOnly = true;
+                    textTelefone.Text = aluno.Telefone;
+                  //  textSenha.Text = aluno.Senha;
+                    chkAtivo.Checked = aluno.Ativo;
+                }
+            }
+        }
+
+        private void chkVisualizar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkVisualizar.Checked)
+                textSenha.UseSystemPasswordChar = false;
+            else
+                textSenha.UseSystemPasswordChar = true;
+        }
+
+        private void btnAlterar_Click(object sender, EventArgs e)
+        {
+            Aluno aluno = new Aluno();
+            aluno.Id = int.Parse(textId.Text);
+            aluno.Nome = textNome.Text;
+            aluno.Telefone = textTelefone.Text;
+            aluno.Ativo = chkAtivo.Checked;
+            aluno.Alterar(aluno);
+
+            MessageBox.Show("Aluno alterado com sucesso");
+            LimparCampos();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Aluno aluno = new Aluno();
+            aluno.Excluir(int.Parse(textId.Text));
+            MessageBox.Show("Aluno alterado com sucesso");
+            LimparCampos();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace livecsharp.Classes
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert agendaVisita values(@id, @nome, @email, @telefone, @senha, 1)";
+            cmd.CommandText = "insert alunos values(@id, @nome, @email, @telefone, @senha, 1)";
             cmd.Parameters.AddWithValue("@id", 0);
             cmd.Parameters.AddWithValue("@nome", Nome);
             cmd.Parameters.AddWithValue("@email", Email);
@@ -96,8 +96,24 @@ namespace livecsharp.Classes
             string ativo = (aluno.Ativo) ? "1" : "0";
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "update aluno set nome='" + aluno.Nome + "', telefone='" + aluno.Telefone + "', senha= md5('" + aluno.Senha + "'), ativo'" + ativo + "' where id =" + aluno.Id;
+            cmd.CommandText = "update alunos set nome='" +
+                aluno.Nome + "', telefone='" + 
+                aluno.Telefone + "', senha= md5('" +aluno.Senha+ "'), ativo=" +
+                ativo+ " where id = " +aluno.Id;
             cmd.ExecuteNonQuery();
+        }
+
+        public void Excluir(int id)
+        {
+            //Alterar ativo = false
+            /* var cmd = Banco.Abrir();
+             cmd.CommandText = "update alunos set ativo = 0 where id=" + id;
+             cmd.ExecuteNonQuery();*/
+            //Exluir da tabela
+            var cmd = Banco.Abrir();
+            cmd.CommandText = "delete from alunos where id=" + id;
+            cmd.ExecuteNonQuery();
+            
         }
     }
 }
